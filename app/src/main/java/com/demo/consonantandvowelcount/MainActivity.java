@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 inputText.setText("");
-                response.setText("SampleFile.txt saved to External Storage");
+                response.setText("SampleFile.txt saved to External Storage...");
             }
         });
 
@@ -63,6 +63,7 @@ public class MainActivity extends Activity {
                     BufferedReader br =
                             new BufferedReader(new InputStreamReader(in));
                     String strLine;
+
                     while ((strLine = br.readLine()) != null) {
                         myData = myData + strLine;
                     }
@@ -70,8 +71,25 @@ public class MainActivity extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                inputText.setText(myData);
-                response.setText("SampleFile.txt data retrieved from Internal Storage");
+                int vowels = 0, consonants = 0;
+
+                myData = myData.toLowerCase();
+                for (int i = 0; i < myData.length(); ++i) {
+                    char ch = myData.charAt(i);
+
+                    // check if character is any of a, e, i, o, u
+                    if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                        ++vowels;
+                    }
+
+                    // check if character is in between a to z
+                    else if ((ch >= 'a' && ch <= 'z')) {
+                        ++consonants;
+                    }
+
+                }
+                inputText.setText(myData+ " Vowels: "+vowels +" Consonants: "+consonants);
+                response.setText("SampleFile.txt data retrieved from Internal Storage...");
             }
         });
 
@@ -102,3 +120,4 @@ public class MainActivity extends Activity {
 
 
 }
+
